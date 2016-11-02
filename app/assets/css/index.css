@@ -10,6 +10,7 @@
     background-color: transparent;
     /*background-color: blue-grey lighten-5; */
 }
-/*.snapShopText {
-  text-emphasis-color: : #0288d1 light-blue darken-2;
-}*/
+
+.addButt {
+  margin-top: 45px; 
+}
