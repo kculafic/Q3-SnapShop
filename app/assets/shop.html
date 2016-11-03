@@ -14,86 +14,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Catamaran">
 
   </head>
-  <body ng-init="cameras = [
-  {
-    title: 'Nikon D3100 DSLR',
-    image: 'http://ecx.images-amazon.com/images/I/713u2gDQqML._SX522_.jpg',
-    rating: 4.1,
-    price: 369.99,
-    onSale: true
-  },
-  {
-    title: 'Canon EOS 70D',
-    image: 'http://ecx.images-amazon.com/images/I/81U00AkAUWL._SX522_.jpg',
-    rating: 2.9,
-    price: 1099.0,
-    onSale: false
-  },
-  {
-    title: 'Nikon D810A',
-    image:'http://ecx.images-amazon.com/images/I/91wtXIfLl2L._SX522_.jpg',
-    rating: 3.4,
-    price: 3796.95,
-    onSale: true
-  },
-  {
-    title: 'Leica M6',
-    image:'https://d1jqecz1iy566e.cloudfront.net/large/bf038.jpg',
-    rating: 5,
-    price: 7299.95,
-    onSale: false
-  },
-  {
-    title: 'Nikon D7200',
-    image:'http://cdn.mos.cms.futurecdn.net/ef9f6ec0a94a4ddaa501e73edcb46da8-650-80.jpg',
-    rating: 3.8,
-    price: 831.95,
-    onSale: false
-  },
-  {
-    title: 'Panasonic LX100',
-    image:'http://cdn.mos.cms.futurecdn.net/51b3bea2fd56f3b5fe281cf1d2f4965c-650-80.jpg',
-    rating: 4.8,
-    price: 500.00,
-    onSale: true
-  },
-  {
-    title: 'Fujifilm X-A2',
-    image:'http://www.adorama.com/images/Large/ifjxa2sl.jpg',
-    rating: 3.5,
-    price: 549.00,
-    onSale: false
-  },
-  {
-    title: 'Canon EOS-5D',
-    image:'http://www.adorama.com/images/Large/ica5dm4k.jpg',
-    rating: 5,
-    price: 2489.00,
-    onSale: false
-  },
-  {
-    title: 'Nikon 1-J5',
-    image:'http://www.adorama.com/images/Large/ink1j5wt3.jpg',
-    rating: 3.6,
-    price: 879.00,
-    onSale: false
-  },
-  {
-    title: 'Panasonic DMC-GM5',
-    image:'http://www.adorama.com/images/Large/ipcdmcgm5r.jpg',
-    rating: 4.2,
-    price: 499.00,
-    onSale: false
-  },
-  {
-    title: 'Canon EOS M10',
-    image:'http://www.adorama.com/images/Large/icam10k.jpg',
-    rating: 3.8,
-    price: 449.00,
-    onSale: true
-  }
-]
-">
+<body ng-controller="CatalogCtrl as CatMan">
 
   <div class="navbar-fixed">
     <nav class="blue-grey lighten-5">
@@ -119,10 +40,17 @@
                   <a href=""><h5 class="black-text name">Bob's Shopping Cart</h5></a>
                   <a href=""><span class="black-text email">Room for some text <i class="material-icons small">shopping_cart</i> </span></a>
                 </div></li>
-                <li><a href="#!">Order Information</a></li>
-                <li><a href="#!">Your Camera</a></li>
+
+                <!-- <li><a href="#!">Order Information</a></li> -->
+                <!-- <li><a href="#!">Your Camera</a></li> -->
+
                 <li><div class="divider"></div></li>
-                <li><a class="subheader right-align">Price: $324.99</a></li>
+
+                <div ng-repeat="photoDevice in CatMan.cart">
+                  <li><a class="bold subheader right-align">{{ photoDevice.title }}</a></li>
+                  <li><a class="subheader right-align">Price: ${{ photoDevice.price }}</a></li>
+                </div>
+
                 <li><a class="subheader right-align">Tax: $19.24</a></li>
                 <li><a class="subheader right-align">Total: $324</a></li>
 
@@ -157,14 +85,16 @@
               <div class="input-field col s6 ">
 
                   <select material-select ng-model="sortOrder">
+                    <option value='' disabled selected>Sort By...</option>
                     <option ng-repeat="value in [ { label:'Name', value: 'title' }, { label: 'Price', value: 'price' }, { label: 'Rating', value: 'rating' }, { label: 'On Sale', value: 'onSale' } ]" value="{{value.value}}">{{value.label}}</option>
                   </select>
               </div>
 
             </form>
           </div>
+        <div>
 
-          <div ng-repeat="camera in cameras | orderBy: sortOrder | filter : searchText " class="col l6 s12 m7">
+          <div ng-repeat="camera in CatMan.cameras | orderBy: sortOrder | filter : searchText " class="col l6 s12 m7">
             <div class="card horizontal card-panel hoverable">
               <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
                 <img  ng-src="{{ camera.image }}" alt="{{ camera.title }}">
@@ -176,158 +106,15 @@
                   <p>Rating: {{ camera.rating }} / 5</p>
                   <p ng-show='{{ camera.onSale }}'>On Sale!</p>
                   <div class="right-align">
-                    <a class="modal-trigger waves-effect waves-light btn white black-text addButt" href="#">Add to cart</a>
+                    <a ng-click="CatMan.addCamera(camera.title, camera.price)" class="modal-trigger waves-effect waves-light btn white black-text addButt" href="#">Add to cart</a>
                   </div>
+
+
                 </div>
               </div>
             </div>
           </div>
-
-
-          <!-- <div class="col l6 s12 m7">
-            <div class="card horizontal card-panel hoverable">
-              <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
-                <img  src="http://ecx.images-amazon.com/images/I/713u2gDQqML._SX522_.jpg" alt="Nikon D3100 DSLR">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                  <h1>Nikon D3100 DSLR</h1>
-                  <p>Price: $369.99</p>
-                  <p>Rating: 4/5</p>
-                  <p>On Sale!</p>
-                  <div class="right-align">
-                    <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#">Add to cart</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
-
-
-            <!-- <div class="col l6 s12 m7">
-              <div class="card horizontal card-panel hoverable">
-                <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
-                  <img  src="http://ecx.images-amazon.com/images/I/713u2gDQqML._SX522_.jpg" alt="Nikon D3100 DSLR">
-                </div>
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <h1>Nikon D3100 DSLR</h1>
-                    <p>Price: $369.99</p>
-                    <p>Rating: 4/5</p>
-                    <p>On Sale!</p>
-                    <div class="right-align">
-                      <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#">Add to cart</a>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div class="col l6 s12 m7">
-              <div class="card horizontal card-panel hoverable">
-                <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
-                  <img  src="http://ecx.images-amazon.com/images/I/81U00AkAUWL._SX522_.jpg" alt="Canon EOS 70D">
-                </div>
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <h1>Nikon D3100 DSLR</h1>
-                    <p>Price: $369.99</p>
-                    <p>Rating: 4/5</p>
-                    <p>On Sale!</p>
-                    <div class="right-align">
-                      <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col l6 s12 m7">
-              <div class="card horizontal card-panel hoverable">
-                <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
-                  <img  src="http://ecx.images-amazon.com/images/I/91wtXIfLl2L._SX522_.jpg" alt="Nikon D810A">
-                </div>
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <h1>Nikon D810A</h1>
-                    <p>Price: $1299.99</p>
-                    <p>Rating: 3/5</p>
-                    <p>Not on Sale!</p>
-                    <div class="right-align">
-                      <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- <div class="col l6 s12 m7">
-              <div class="card horizontal card-panel hoverable">
-                <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
-                  <img  src="https://d1jqecz1iy566e.cloudfront.net/large/bf038.jpg" alt="Leica M6">
-                </div>
-                <div class="card-stacked">
-                  <div class="card-content">
-                    <h1>Leica M6</h1>
-                    <p>Price: $7299.99</p>
-                    <p>Rating: 5/5</p>
-                    <p>Not on Sale!</p>
-                    <div class="right-align">
-                      <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#">Add to cart</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
-            <!-- <ul class="row">
-            <li class="col l6 m6 s12">
-              <div class="card center-align">
-                <div class="card-image">
-                  <img src="http://ecx.images-amazon.com/images/I/713u2gDQqML._SX522_.jpg" alt="Nikon D3100 DSLR">
-                </div>
-                <div class="card-content">
-                  <h3>Nikon D3100 DSLR</h3>
-                  <div class="card-action row">
-                    <p class="col s6">Rating: 4/5</p>
-                    <p class="col s6">Price: $369.99</p>
-                    <p class="col s6">On Sale!</p>
-                  </div>
-                </div>
-              </div>
-            </li> -->
-<!--
-            <li class="col l6 m6 s12">
-              <div class="card center-align">
-                <div class="card-image">
-                  <img src="http://ecx.images-amazon.com/images/I/81U00AkAUWL._SX522_.jpg" alt="Canon EOS 70D">
-                </div>
-                <div class="card-content">
-                  <h3>Canon EOS 70D</h3>
-                  <div class="card-action row">
-                    <p class="col s6">Rating: 2/5</p>
-                    <p class="col s6">Price: $1099.99</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-
-            <li class="col l6 m6 s12">
-              <div class="card center-align">
-                <div class="card-image">
-                  <img src="http://ecx.images-amazon.com/images/I/91wtXIfLl2L._SX522_.jpg" alt="Nikon D810A">
-                </div>
-                <div class="card-content">
-                  <h3>Nikon D810A</h3>
-                  <div class="card-action row">
-                    <p class="col s6">Rating: 3/5</p>
-                    <p class="col s6">Price: 3796.95</p>
-                  </div>
-                </div>
-              </div>
-            </li> -->
+        </div>
 
           </div>
         </div>
