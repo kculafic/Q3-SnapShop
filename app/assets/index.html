@@ -12,138 +12,144 @@
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Catamaran">
   </head>
-  <body>
 
-<div id=photo>
 
+<body ng-controller="CatalogCtrl as CatMan">
   <div class="navbar-fixed">
     <nav class="blue-grey lighten-5">
-    <!-- <nav class="nav"> -->
-
       <div class="container">
         <a>
-          <img width="6.5%" height="100%" class="icon hide-on-med-and-down " src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png" alt="">
-        </a>
-        <a href="index.html" class="brand-logo light-green-text text-darken-4">snapShop</a>
+          <img width="6.5%" height="100%" class="icon hide-on-med-and-down " src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png" alt="">          </a>
+          <a href="index.html" class="brand-logo light-green-text text-darken-4">snapShop</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="shop.html" class="black-text">Shop</a></li>
-          <li><a href="sass.html" class="black-text">Account
-            <!-- <i class="small material-icons">account_box</i> -->
-            </a></li>
-          <!-- <li><a href="#" data-activates="slide-out" class="slide-collapse black-text">Cart</a>
+          <li><a href="index.html" class="black-text">Home</a></li>
+          <li><a href="sass.html" class="black-text">Account</a></li>
+          <li><a href="#" data-activates="slide-out" class="slide-collapse black-text">Cart ({{ CatMan.cart().length }}) </a></li>
+
+        <ul id="slide-out" class="side-nav">
+          <li>
+            <div class="userView">
+              <div style="height: px; "  class="background">
+                <img src="img/mistymorning.jpg">
+              </div>
+              <a href=""><h5 class="black-text name">Bob's Shopping Cart</h5></a>
+              <a href=""><img width="90%" src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png"></a>
+                    <!-- <a href=""><span class="black-text email">Room for some text <i class="material-icons small">shopping_cart</i> </span></a> -->
+            </div>
           </li>
 
-            <ul id="slide-out" class="side-nav">
-              <li><div class="userView">
-                <div class="background">
-                  <img src="images/office.jpg">
-                </div>
-                <a href=""><img src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png"></a>
-                <a href=""><h5 class="black-text name">My Shopping Cart</h5></a>
-                <a href=""><span class="black-text email">Bob Wiley</span></a>
-              </div></li>
-              <li><a href="#!"><i class="material-icons">shopping_cart</i>Order Information</a></li>
-              <li><a href="#!">Camera</a></li>
-              <li><div class="divider"></div></li>
-              <li><a class="subheader">Subheader</a></li>
-              <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-            </ul>
- -->
+          <div ng-repeat="photoDevice in CatMan.cart()">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                     <a class="subheader left-align"> {{ photoDevice.title }} </a>
+                  </td>
+                  <td>
+                     <a class="subheader right-align"> {{ photoDevice.price | currency }}</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <li><div class="divider">  </div></li>
+            <li><a class="subheader right-align blue-text">Subtotal: {{ CatMan.subtotal() | currency }}</a></li>
+            <li><a class="subheader right-align blue-text">Tax: {{ CatMan.subtotal() * 0.1 | currency }}</a></li>
+            <li><a class="subheader bold right-align blue-text">Total: {{ (CatMan.subtotal() * 0.1) + CatMan.subtotal() | currency }}</a></li>
 
 
+            <li><a class="subheader left-align waves-effect" href="#!">Checkout <i class="material-icons small">shopping_cart</i> </a></li>
+          </div>
+
+                </ul>
 
 
-              <!-- <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a> -->
-
-
-          <li><a href="badges.html" class="black-text">Log Out</a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-
-  <!-- <header id="photo" >
-    <div class="valign-wrapper">
-      <h1 class="center align black-text">Photography </h1>
-      <a href="order.html" class="waves-effect waves-light btn">Shop Cameras</a>
-
+              </a></li>
+            <li><a href="badges.html" class="black-text">Log Out</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
-  </header> -->
-<!-- <div > -->
-  <main id="maincontainer" class="container">
-        <div style="height: 500px;" >
-            <div class="container">
-                <div class="row">
-                    <div class="col s12 center-align ">
-                        <h1 style="font-size: 45px;">Welcome to <strong class=" light-green-text text-darken-4">snapShop</strong></h1>
 
-                        <p>
-                          <span style="font-size: 25px;"class="light"> Seattle's #1 source for quality photography equipment</span>
-                        </p>
+
+    <div id=photo>
+      <main id="maincontainer" class="container">
+            <div style="height: 500px;" class="valign-wrapper" >
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 center-align ">
+                            <h1 style="font-size: 45px;">Welcome to <strong class=" light-green-text text-darken-4">snapShop</strong></h1>
+
+                            <p>
+                              <span style="font-size: 25px;"class="light"> Seattle's #1 source for quality photography equipment</span>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <div class="center-align">
-                            <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal1">Sign Up</a>
-                            <div id="modal1" class="modal modal-fixed-footer">
-                                <div class="modal-content">
-                                    <h4>Create Acount</h4>
-                                    <p>Welcome to snapShop. Please fill out the following to get started finding your new camera. </p>
-                                    <div class="row">
-                                        <form id='submit' class="col s12">
-                                            <div class="row">
-                                                <div class="input-field col s6">
-                                                    <input id="first_name" type="text" class="validate">
-                                                    <label class="left-align" for="first_name">First Name</label>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="center-align">
+                                <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal1">Sign Up</a>
+                                <div id="modal1" class="modal modal-fixed-footer">
+                                    <div class="modal-content">
+                                        <h4>Create Acount</h4>
+                                        <p>Welcome to snapShop. Please fill out the following to get started finding your new camera. </p>
+                                        <div class="row">
+                                            <form id='submit' class="col s12">
+                                                <div class="row">
+                                                    <div class="input-field col s6">
+                                                        <input id="first_name" type="text" class="validate">
+                                                        <label class="left-align" for="first_name">First Name</label>
+                                                    </div>
+                                                    <div class="input-field col s6">
+                                                        <input id="last_name" type="text" class="validate">
+                                                        <label class="left-align" for="last_name">Last Name</label>
+                                                    </div>
                                                 </div>
-                                                <div class="input-field col s6">
-                                                    <input id="last_name" type="text" class="validate">
-                                                    <label class="left-align" for="last_name">Last Name</label>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="email" type="email" class="validate">
+                                                        <label class="left-align" for="email">Email</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input id="email" type="email" class="validate">
-                                                    <label class="left-align" for="email">Email</label>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="password" type="password" class="validate">
+                                                        <label class="left-align" for="password">Password</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input id="password" type="password" class="validate">
-                                                    <label class="left-align" for="password">Password</label>
+                                                <div class="modal-footer">
+                                                    <a href="user.html" class="signup modal-action modal-close waves-effect waves-green btn-flat ">Submit</a>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="user.html" class="signup modal-action modal-close waves-effect waves-green btn-flat ">Submit</a>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal2">Login</a>
-                            <div id="modal2" class="modal modal-fixed-footer">
-                                <div class="modal-content">
-                                    <h4>Login</h4>
-                                    <p>Welcome back to snapShot, please login. </p>
-                                    <div class="row">
-                                        <form class="col s12">
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input id="login-email" type="email" class="validate">
-                                                    <label class="left-align" for="email">Email</label>
+                                <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal2">Login</a>
+                                <div id="modal2" class="modal modal-fixed-footer">
+                                    <div class="modal-content">
+                                        <h4>Login</h4>
+                                        <p>Welcome back to snapShot, please login. </p>
+                                        <div class="row">
+                                            <form class="col s12">
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="login-email" type="email" class="validate">
+                                                        <label class="left-align" for="email">Email</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col s12">
-                                                    <input id="login-password" type="password" class="validate">
-                                                    <label class="left-align" for="password">Password</label>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <input id="login-password" type="password" class="validate">
+                                                        <label class="left-align" for="password">Password</label>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <a href="shop.html" class="login modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
-                                            </div>
-                                        </form>
+                                                <div class="modal-footer">
+                                                    <a href="shop.html" class="login modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -151,16 +157,66 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-    </main>
-  </div>
 
-    <!-- <footer id="footer" class="page-footer #e8f5e9 green lighten-5">
-        <div class="footer-copyright center-align">
-            <div class="container black-text">jobThing: Q2 Project - Galvanize Web Development. © 2016 Karl and Krsto</div>
+        </main>
+      </div>
+
+      <div class="container ">
+
+        <div class="row">
+          <h1 style="font-size: 45px;" class="center-align">Cameras For Sale</h1>
+          <div >
+
+            <div class="row header">
+              <form class="col s12">
+                <div class="">
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">search</i>
+                    <label for="icon_prefix">Search Cameras</label>
+                    <input ng-model="searchText" id="icon_prefix" type="text" class="validate">
+                  </div>
+
+                </div>
+
+                <div class="input-field col s6 ">
+
+                    <select material-select ng-model="sortOrder">
+                      <option value='' disabled selected>Sort By...</option>
+                      <option ng-repeat="value in [ { label:'Name', value: 'title' }, { label: 'Price', value: 'price' }, { label: 'Rating', value: 'rating' }, { label: 'On Sale', value: 'onSale' } ]" value="{{value.value}}">{{value.label}}</option>
+                    </select>
+                </div>
+
+              </form>
+            </div>
+          <div>
+
+            <div ng-repeat="camera in CatMan.cameras() | orderBy: sortOrder : reverse = true | filter : searchText " class="col l6 s12 m7">
+              <div class="card horizontal card-panel hoverable">
+                <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
+                  <img  ng-src="{{ camera.image }}" alt="{{ camera.title }}">
+                </div>
+                <div class="card-stacked">
+                  <div class="card-content">
+                    <p style="font-size: 20px;" >{{ camera.title }}</p>
+                    <p>{{ camera.price | currency }}</p>
+                    <p>Rating: {{ camera.rating }} / 5</p>
+                    <div style="fonr-size:25px" ng-show='{{ camera.onSale }}'> ON SALE!!!
+                    </div>
+                    <div class="right-align">
+                      <a ng-click="CatMan.addCamera(camera.title, camera.price)" class="modal-trigger waves-effect waves-light btn white black-text addButt">Add to cart</a>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            </div>
+          </div>
         </div>
-    </footer> -->
 
 
 

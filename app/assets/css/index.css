@@ -1,8 +1,8 @@
 #photo {
-  background: url(../img/cascades.jpg);
+  background: url(../img/cascadesWide.jpg);
   background-size: cover;
   flex-direction: column;
-  height: 1000px;
+  height: 750px;
   justify-content: center;
 }
 
@@ -12,5 +12,5 @@
 }
 
 .addButt {
-  margin-top: 45px; 
+  margin-top: 45px;
 }
