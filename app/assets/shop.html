@@ -27,34 +27,55 @@
           <li><a href="index.html" class="black-text">Home</a></li>
           <li><a href="sass.html" class="black-text">Account
             </a></li>
-
-            <li><a href="#" data-activates="slide-out" class="slide-collapse black-text">Cart</a>
+          </a></li>
+            <li><a href="#" data-activates="slide-out" class="slide-collapse black-text">Cart ({{ CatMan.cart().length }}) </a>
             </li>
 
-              <ul id="slide-out" class="side-nav">
-                <li><div class="userView">
-                  <div class="background">
-                    <img src="img/mistymorning.jpg">
-                  </div>
-                  <a href=""><img width="45%" src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png"></a>
-                  <a href=""><h5 class="black-text name">Bob's Shopping Cart</h5></a>
-                  <a href=""><span class="black-text email">Room for some text <i class="material-icons small">shopping_cart</i> </span></a>
-                </div></li>
-
-                <!-- <li><a href="#!">Order Information</a></li> -->
-                <!-- <li><a href="#!">Your Camera</a></li> -->
-
-                <li><div class="divider"></div></li>
-
-                <div ng-repeat="photoDevice in CatMan.cart">
-                  <li><a class="bold subheader right-align">{{ photoDevice.title }}</a></li>
-                  <li><a class="subheader right-align">Price: ${{ photoDevice.price }}</a></li>
+            <ul id="slide-out" class="side-nav">
+              <li><div class="userView">
+                <div style="height: px; "  class="background">
+                  <img src="img/mistymorning.jpg">
                 </div>
+                <a href=""><h5 class="black-text name">Bob's Shopping Cart</h5></a>
+                <a href=""><img width="90%" src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png"></a>
+                <!-- <a href=""><span class="black-text email">Room for some text <i class="material-icons small">shopping_cart</i> </span></a> -->
+              </div></li>
 
-                <li><a class="subheader right-align">Tax: $19.24</a></li>
-                <li><a class="subheader right-align">Total: $324</a></li>
+          <div ng-repeat="photoDevice in CatMan.cart()">
+            <table>
+              <!-- <thead>
+                 <tr>
+                   <th>
+                      Item
+                   </th>
+                   <th>
+                      Price
+                   </th>
+                 </tr>
+              </thead> -->
+              <tbody>
+                <tr>
+                  <td>
+                     <a class="subheader left-align"> {{ photoDevice.title }} </a>
+                  </td>
+                  <td>
+                     <a class="subheader right-align"> {{ photoDevice.price | currency }}</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-                <li><a class=" waves-effect" href="#!">Checkout</a></li>
+            <div>
+              <li><div class="divider">  </div></li>
+              <li><a class="subheader right-align blue-text">Subtotal: {{ CatMan.subtotal() | currency }}</a></li>
+              <li><a class="subheader right-align blue-text">Tax: {{ CatMan.subtotal() * 0.1 | currency }}</a></li>
+              <li><a class="subheader bold right-align blue-text">Total: {{ (CatMan.subtotal() * 0.1) + CatMan.subtotal() | currency }}</a></li>
+
+
+              <li><a class="subheader left-align waves-effect" href="#!">Checkout <i class="material-icons small">shopping_cart</i> </a></li>
+            </div>
+
               </ul>
 
 
@@ -94,17 +115,19 @@
           </div>
         <div>
 
-          <div ng-repeat="camera in CatMan.cameras | orderBy: sortOrder | filter : searchText " class="col l6 s12 m7">
+          <div ng-repeat="camera in CatMan.cameras() | orderBy: sortOrder | filter : searchText " class="col l6 s12 m7">
             <div class="card horizontal card-panel hoverable">
               <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
                 <img  ng-src="{{ camera.image }}" alt="{{ camera.title }}">
               </div>
               <div class="card-stacked">
                 <div class="card-content">
-                  <p class="bold">{{ camera.title }}</p>
+                  <p style="font-size: 20px;" >{{ camera.title }}</p>
                   <p>{{ camera.price | currency }}</p>
                   <p>Rating: {{ camera.rating }} / 5</p>
-                  <p ng-show='{{ camera.onSale }}'>On Sale!</p>
+                  <!-- <div style="height: 25px; width: 25px;" ng-show='{{ camera.onSale }}'> <img src="img/sale.jpeg"> -->
+
+                </div>
                   <div class="right-align">
                     <a ng-click="CatMan.addCamera(camera.title, camera.price)" class="modal-trigger waves-effect waves-light btn white black-text addButt" href="#">Add to cart</a>
                   </div>
