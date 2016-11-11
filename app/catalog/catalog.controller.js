@@ -1,32 +1,19 @@
 class CatalogCtrl {
-  constructor(catalogSvc) {
+  constructor(catalogSvc, cartSvc) {
     this.catalogSvc = catalogSvc;
+    this.cartSvc = cartSvc;
   }
 
   cameras() {
     return this.catalogSvc.cameras;
   }
 
-  cart() {
-    return this.catalogSvc.cart;
-  }
-
   addCamera(title, price) {
-    this.catalogSvc.addCamera(title, price);
+    this.cartSvc.addCamera(title, price);
   }
-
-  subtotal() {
-    return this.catalogSvc.subtotal;
-  }
-
-  tax() {
-    return this.catalogSvc.tax; 
-  }
-
 }
 
 
-
-CatalogCtrl.$inject = ['CatalogService'];
+CatalogCtrl.$inject = ['CatalogService', 'CartService'];
 
 export default CatalogCtrl;

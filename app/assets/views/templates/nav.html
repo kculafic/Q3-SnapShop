@@ -1,0 +1,68 @@
+<script>
+$(".slide-collapse").sideNav({
+    menuWidth: 375, // Default is 240
+    edge: 'right', // Choose the horizontal origin
+    closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    draggable: true // Choose whether you can drag to open on touch screens
+  }
+);
+</script>
+
+<div ng-controller="CartController as Cart" class="navbar-fixed">
+  <nav class="blue-grey lighten-5">
+    <div ng-controller="CartCountCtrl as Counting" class="container">
+      <a>
+        <img width="6.5%" height="100%" class="icon hide-on-med-and-down " src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png" alt="">          </a>
+        <a href="index.html" class="brand-logo light-green-text text-darken-4">snapShop</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="index.html" class="black-text">Home</a></li>
+        <li><a href="sass.html" class="black-text">Account</a></li>
+        <li><a data-activates="slide-out" class="slide-collapse black-text">Cart ({{ Counting.cartCount() }}) </a></li>
+
+
+      <ul id="slide-out" class="side-nav">
+        <li>
+          <div class="userView">
+            <div style="height: px; "  class="background">
+              <img src="img/mistymorning.jpg">
+            </div>
+            <a href=""><h5 class="black-text name">Bob's Shopping Cart</h5></a>
+            <a href=""><img width="90%" src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png"></a>
+                  <!-- <a href=""><span class="black-text email">Room for some text <i class="material-icons small">shopping_cart</i> </span></a> -->
+          </div>
+        </li>
+
+        <div ng-repeat="photoDevice in Cart.cart()">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                   <a class="subheader left-align"> {{ photoDevice.title }} </a>
+                </td>
+                <td>
+                   <a class="subheader right-align"> {{ photoDevice.price | currency }}</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div>
+          <li><div class="divider">  </div></li>
+          <li><a class="subheader right-align blue-text">Subtotal: {{ Cart.subtotal() | currency }}</a></li>
+          <li><a class="subheader right-align blue-text">Tax: {{ Cart.subtotal() * 0.1 | currency }}</a></li>
+          <li><a class="subheader bold right-align blue-text">Total: {{ (Cart.subtotal() * 0.1) + Cart.subtotal() | currency }}</a></li>
+
+
+          <li><a class="subheader left-align waves-effect" href="#!">Checkout <i class="material-icons small">shopping_cart</i> </a></li>
+        </div>
+
+              </ul>
+
+
+            </a></li>
+          <li><a href="badges.html" class="black-text">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>

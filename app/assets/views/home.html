@@ -1,0 +1,143 @@
+<script> $('.modal-trigger').leanModal(); </script>
+
+<div id=photo>
+  <main id="maincontainer" class="container">
+        <div style="height: 500px;" class="valign-wrapper" >
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align ">
+                        <h1 style="font-size: 45px;">Welcome to <strong class=" light-green-text text-darken-4">snapShop</strong></h1>
+
+                        <p>
+                          <span style="font-size: 25px;"class="light"> Seattle's #1 source for quality photography equipment</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="center-align">
+                            <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal1">Sign Up</a>
+                            <div id="modal1" class="modal modal-fixed-footer">
+                                <div class="modal-content">
+                                    <h4>Create Acount</h4>
+                                    <p>Welcome to snapShop. Please fill out the following to get started finding your new camera. </p>
+                                    <div class="row">
+                                        <form id='submit' class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s6">
+                                                    <input id="first_name" type="text" class="validate">
+                                                    <label class="left-align" for="first_name">First Name</label>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                    <input id="last_name" type="text" class="validate">
+                                                    <label class="left-align" for="last_name">Last Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="email" type="email" class="validate">
+                                                    <label class="left-align" for="email">Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="password" type="password" class="validate">
+                                                    <label class="left-align" for="password">Password</label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="user.html" class="signup modal-action modal-close waves-effect waves-green btn-flat ">Submit</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal2">Login</a>
+                            <div id="modal2" class="modal modal-fixed-footer">
+                                <div class="modal-content">
+                                    <h4>Login</h4>
+                                    <p>Welcome back to snapShot, please login. </p>
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="login-email" type="email" class="validate">
+                                                    <label class="left-align" for="email">Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="login-password" type="password" class="validate">
+                                                    <label class="left-align" for="password">Password</label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="shop.html" class="login modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+  </div>
+
+  <div ng-controller="CatalogCtrl as CatalogList" class="container ">
+
+    <div class="row">
+      <h1 style="font-size: 45px;" class="center-align">Cameras For Sale</h1>
+      <div >
+
+        <div class="row header">
+          <form class="col s12">
+            <div class="">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">search</i>
+                <label for="icon_prefix">Search Cameras</label>
+                <input ng-model="searchText" id="icon_prefix" type="text" class="validate">
+              </div>
+
+            </div>
+
+            <div class="input-field col s6 ">
+
+                <select material-select ng-model="sortOrder">
+                  <option value='' disabled selected>Sort By...</option>
+                  <option ng-repeat="value in [ { label:'Name', value: 'title' }, { label: 'Price', value: 'price' }, { label: 'Rating', value: 'rating' }, { label: 'On Sale', value: 'onSale' } ]" value="{{value.value}}">{{value.label}}</option>
+                </select>
+            </div>
+
+          </form>
+        </div>
+      <div>
+
+        <div ng-repeat="camera in CatalogList.cameras() | orderBy: sortOrder : reverse = true | filter : searchText " class="col l6 s12 m7">
+          <div class="card horizontal card-panel hoverable">
+            <div style="height: 185px;" class=" card-image center-align valign-wrapper card-panel hoverable">
+              <img  ng-src="{{ camera.image }}" alt="{{ camera.title }}">
+            </div>
+            <div class="card-stacked">
+              <div class="card-content">
+                <p style="font-size: 20px;" >{{ camera.title }}</p>
+                <p>{{ camera.price | currency }}</p>
+                <p>Rating: {{ camera.rating }} / 5</p>
+                <div style="fonr-size:25px" ng-show='{{ camera.onSale }}'> ON SALE!!!
+                </div>
+                <div class="right-align">
+                  <a ng-click="CatalogList.addCamera(camera.title, camera.price); " class="modal-trigger waves-effect waves-light btn white black-text addButt" toast="click">Add to cart</a>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>

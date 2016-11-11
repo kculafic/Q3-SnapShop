@@ -1,9 +1,6 @@
 class CatalogService {
   constructor() {
-    this.cart = [];
-    this.subtotal = 0;
-    this.tax = 0;
-    this.cameras= [
+    this.cameras = [
     {
       title: 'Nikon D3100 DSLR',
       image: 'http://ecx.images-amazon.com/images/I/713u2gDQqML._SX522_.jpg',
@@ -83,16 +80,6 @@ class CatalogService {
     }
   ]
   }
-
-  addCamera(title, price) {
-    this.subtotal += price;
-    this.cart.push({
-      title: title,
-      price: price
-    })
-    Materialize.toast(`${title}` + ' has been added!', 4000);
-  }
-
 
 }
 export default CatalogService;

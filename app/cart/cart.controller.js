@@ -1,17 +1,28 @@
 class CartCtrl {
-  constructor(peopleSvc) {
-    this.peopleSvc = peopleSvc;
+  constructor(cartSvc) {
+    this.cartSvc = cartSvc;
+  }
+  cameras() {
+    return this.cartSvc.cameras;
   }
 
-  constructor() {
-    this.messToAdd = '';
-    this.messages = [];
+  cart() {
+    return this.cartSvc.cart;
   }
-  peopleCount() {
-    return this.peopleSvc.people.length;
+
+  addCamera(title, price) {
+    this.cartSvc.addCamera(title, price);
+  }
+
+  subtotal() {
+    return this.cartSvc.subtotal;
+  }
+
+  tax() {
+    return this.cartSvc.tax;
   }
 }
 
-CartCtrl.$inject = ['PeopleService'];
+CartCtrl.$inject = ['CartService'];
 
 export default CartCtrl;
