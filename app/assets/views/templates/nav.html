@@ -1,6 +1,6 @@
 <script>
 $(".slide-collapse").sideNav({
-    menuWidth: 375, // Default is 240
+    menuWidth: 475, // Default is 240
     edge: 'right', // Choose the horizontal origin
     closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
     draggable: true // Choose whether you can drag to open on touch screens
@@ -32,7 +32,7 @@ $(".slide-collapse").sideNav({
           </div>
         </li>
 
-        <div ng-repeat="photoDevice in Cart.cart()">
+        <div ng-repeat="photoDevice in Cart.cart($index)">
           <table>
             <tbody>
               <tr>
@@ -41,6 +41,9 @@ $(".slide-collapse").sideNav({
                 </td>
                 <td>
                    <a class="subheader right-align"> {{ photoDevice.price | currency }}</a>
+                </td>
+                <td>
+                   <a ng-click="Cart.deleteItem($index, photoDevice.price)" ><i class="material-icons" style="font-size: 20px;">delete</i></a>
                 </td>
               </tr>
             </tbody>

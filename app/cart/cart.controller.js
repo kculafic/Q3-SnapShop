@@ -1,4 +1,4 @@
-class CartCtrl {
+class CartController {
   constructor(cartSvc) {
     this.cartSvc = cartSvc;
   }
@@ -15,14 +15,20 @@ class CartCtrl {
   }
 
   subtotal() {
+    // console.log(this.cartSvc.getSubtotal());
     return this.cartSvc.subtotal;
   }
 
   tax() {
     return this.cartSvc.tax;
   }
+
+  deleteItem(index, price) {
+    this.cartSvc.deleteItem(index, price);
+
+  }
 }
 
-CartCtrl.$inject = ['CartService'];
+CartController.$inject = ['CartService'];
 
-export default CartCtrl;
+export default CartController;

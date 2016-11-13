@@ -7,14 +7,19 @@ class CartService {
   }
 
   addCamera(title, price) {
-    this.subtotal += price;
+    this.subtotal += parseInt(price);
     this.cart.push({
       title: title,
       price: price
     })
-    console.log('before');
+
     Materialize.toast(`${title}` + ' has been added!', 4000);
     this.$state.go('')
+  }
+
+  deleteItem(index, price){
+    this.cart.splice(index, 1);
+    this.subtotal -= parseInt(price);
   }
 }
 

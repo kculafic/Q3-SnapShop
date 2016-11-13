@@ -3,7 +3,6 @@ import angularMaterialize from 'angular-materialize'
 
 import uiRouter from 'angular-ui-router'
 
-
 import CatalogCtrl from './catalog/catalog.controller';
 import CatalogService from './catalog/catalog.service';
 
@@ -12,24 +11,22 @@ import CartController from './cart/cart.controller';
 
 import CartCountCtrl from './cart/cart_count.controller';
 
-
-
 angular.module('my-app', [angularMaterialize, uiRouter])
   .service('CatalogService', CatalogService)
-  .service('CartService', CartService)
   .controller('CatalogCtrl', CatalogCtrl)
+  .service('CartService', CartService)
   .controller('CartController', CartController)
-  .controller('CartCountCtrl', CartCountCtrl);
+  .controller('CartCountCtrl', CartCountCtrl)
   .config(['$stateProvider', ($stateProvider) => {
   $stateProvider
     .state('home', {
       url: '',
       templateUrl: 'views/home.html'
     })
-  //   .state('main', {
-  //     url: '/',
-  //     templateUrl: 'views/home.html'
-  //   })
+    .state('main', {
+      url: '/',
+      templateUrl: 'views/home.html'
+    })
   //   .state('shops', {
   //     url: '/shops',
   //     templateUrl: 'views/shops.html'
@@ -46,4 +43,4 @@ angular.module('my-app', [angularMaterialize, uiRouter])
   //     url: '/account',
   //     templateUrl: 'views/user/account.html'
   //   });
-  // }]);
+  }]);

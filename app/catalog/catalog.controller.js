@@ -2,10 +2,11 @@ class CatalogCtrl {
   constructor(catalogSvc, cartSvc) {
     this.catalogSvc = catalogSvc;
     this.cartSvc = cartSvc;
+    this.cameras = [];
   }
 
-  cameras() {
-    return this.catalogSvc.cameras;
+  cameraList() {
+    return this.catalogSvc.cameraList();
   }
 
   addCamera(title, price) {
