@@ -9,6 +9,8 @@ $(".slide-collapse").sideNav({
 </script>
 
 <div ng-controller="CartController as Cart" class="navbar-fixed">
+<div ng-controller="SignOutCtrl as logOut">
+
   <nav class="blue-grey lighten-5">
     <div ng-controller="CartCountCtrl as Counting" class="container">
       <a>
@@ -16,8 +18,8 @@ $(".slide-collapse").sideNav({
         <a href="index.html" class="brand-logo light-green-text text-darken-4">snapShop</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="index.html" class="black-text">Home</a></li>
-        <li><a href="sass.html" class="black-text">Account</a></li>
-        <li><a data-activates="slide-out" class="slide-collapse black-text">Cart ({{ Counting.cartCount() }}) </a></li>
+        <!-- <li><a href="sass.html" class="black-text">Account</a></li> -->
+        <li><a data-activates="slide-out" class="slide-collapse black-text"> Cart ({{ Counting.cartCount() }}) </a></li>
 
 
       <ul id="slide-out" class="side-nav">
@@ -26,8 +28,8 @@ $(".slide-collapse").sideNav({
             <div style="height: px; "  class="background">
               <img src="img/mistymorning.jpg">
             </div>
-            <a href=""><h5 class="black-text name">Bob's Shopping Cart</h5></a>
-            <a href=""><img width="90%" src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png"></a>
+            <a href=""><h5 class="light-green-text text-darken-4">snapShop Shopping Cart</h5></a>
+            <a href="" class="right-align"><img width="45%" src="http://www.dadophotography.com/wp/wp-content/uploads/2015/09/camera-logo-512.png"></a>
                   <!-- <a href=""><span class="black-text email">Room for some text <i class="material-icons small">shopping_cart</i> </span></a> -->
           </div>
         </li>
@@ -64,8 +66,9 @@ $(".slide-collapse").sideNav({
 
 
             </a></li>
-          <li><a href="badges.html" class="black-text">Log Out</a></li>
+          <li><a href="#" class="black-text" ng-click="logOut.signOut()">Log Out</a></li>
         </ul>
       </div>
     </nav>
+  </div>
   </div>

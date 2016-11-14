@@ -11,12 +11,25 @@ import CartController from './cart/cart.controller';
 
 import CartCountCtrl from './cart/cart_count.controller';
 
+import AuthService from './user/authentication.service';
+import loginCtrl from './user/login.controller';
+
+import SignUpService from './user/signUp.service';
+import SignUpCtrl from './user/signUp.controller';
+
+import SignOutCtrl from './user/signOut.controller';
+
 angular.module('my-app', [angularMaterialize, uiRouter])
   .service('CatalogService', CatalogService)
   .controller('CatalogCtrl', CatalogCtrl)
   .service('CartService', CartService)
   .controller('CartController', CartController)
   .controller('CartCountCtrl', CartCountCtrl)
+  .service('AuthService', AuthService)
+  .controller('loginCtrl', loginCtrl)
+  .service('SignUpService', SignUpService)
+  .controller('SignUpCtrl', SignUpCtrl)
+  .controller('SignOutCtrl', SignOutCtrl)
   .config(['$stateProvider', ($stateProvider) => {
   $stateProvider
     .state('home', {

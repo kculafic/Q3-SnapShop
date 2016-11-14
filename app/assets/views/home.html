@@ -17,35 +17,35 @@
               <div class="center-align">
                 <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal1">Sign Up</a>
                 <div id="modal1" class="modal modal-fixed-footer">
-                  <div class="modal-content">
+                  <div class="modal-content" ng-controller="SignUpCtrl as signUpForm">
                     <h4>Create Acount</h4>
                     <p>Welcome to snapShop. Please fill out the following to get started finding your new camera. </p>
                     <div class="row">
                       <form id='submit' class="col s12">
                         <div class="row">
                           <div class="input-field col s6">
-                            <input id="first_name" type="text" class="validate">
+                            <input id="first_name" type="text" class="validate" ng-model="firstName">
                             <label class="left-align" for="first_name">First Name</label>
                           </div>
                           <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate">
+                            <input id="last_name" type="text" class="validate" ng-model="lastName">
                             <label class="left-align" for="last_name">Last Name</label>
                           </div>
                         </div>
                         <div class="row">
                           <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
+                            <input id="email" type="email" class="validate" ng-model="email">
                             <label class="left-align" for="email">Email</label>
                           </div>
                         </div>
                         <div class="row">
                           <div class="input-field col s12">
-                            <input id="password" type="password" class="validate">
+                            <input id="password" type="password" class="validate" ng-model="password">
                             <label class="left-align" for="password">Password</label>
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <a href="user.html" class="signup modal-action modal-close waves-effect waves-green btn-flat ">Submit</a>
+                          <a href="#" class="signup modal-action modal-close waves-effect waves-green btn-flat" ng-click="signUpForm.addUser(firstName, lastName, email, password)">Submit</a>
                         </div>
                       </form>
                     </div>
@@ -53,25 +53,25 @@
                 </div>
                 <a class="modal-trigger waves-effect waves-light btn-large white black-text" href="#modal2">Login</a>
                 <div id="modal2" class="modal modal-fixed-footer">
-                  <div class="modal-content">
+                  <div class="modal-content" ng-controller="loginCtrl as login">
                     <h4>Login</h4>
                     <p>Welcome back to snapShot, please login. </p>
                     <div class="row">
                       <form class="col s12">
                         <div class="row">
                           <div class="input-field col s12">
-                            <input id="login-email" type="email" class="validate">
+                            <input id="login-email" type="email" class="validate" ng-model="email">
                             <label class="left-align" for="email">Email</label>
                           </div>
                         </div>
                         <div class="row">
                           <div class="input-field col s12">
-                            <input id="login-password" type="password" class="validate">
+                            <input id="login-password" type="password" class="validate" ng-model="password">
                             <label class="left-align" for="password">Password</label>
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <a href="shop.html" class="login modal-action modal-close waves-effect waves-green btn-flat">Submit</a>
+                          <a href="#" class="login modal-action modal-close waves-effect waves-green btn-flat" ng-click="login.signIn(email, password)">Submit</a>
                         </div>
                       </form>
                     </div>

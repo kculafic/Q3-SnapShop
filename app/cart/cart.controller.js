@@ -25,7 +25,6 @@ class CartController {
 
   deleteItem(index, price) {
     this.cartSvc.deleteItem(index, price);
-
   }
 }
 
