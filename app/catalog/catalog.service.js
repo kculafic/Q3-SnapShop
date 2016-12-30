@@ -8,7 +8,7 @@ class CatalogService {
     })
   }
 
-  cameraList() {
+  camera() {
     return this.cameras;
   }
 }
